@@ -22,9 +22,10 @@ unit uzvmcaccess;
 
 interface
 uses
-  sysutils, Classes, Dialogs,
-  SQLDB, odbcconn,
-  uzcinterface;
+   sysutils, Classes, Dialogs,
+   SQLDB, odbcconn,
+   uzcinterface,
+   uzeentdevice, uzcdrawings, varmandef, gzctnrVectorTypes;
 
 type
   TDeviceInfoForExport = record
@@ -54,7 +55,9 @@ type
     procedure Commit;
 
     property DatabasePath: string read FDatabasePath write FDatabasePath;
-  end;
+   end;
+
+function getinfoheadcab(iname: string): string;
 
 implementation
 
@@ -150,8 +153,44 @@ end;
 
 procedure TAccessDBExporter.Commit;
 begin
-  FTransaction.Commit;
-  zcUI.TextMessage('Access export committed successfully', TMWOHistoryOut);
+   FTransaction.Commit;
+   zcUI.TextMessage('Access export committed successfully', TMWOHistoryOut);
+end;
+
+function getinfoheadcab(iname: string): string;
+var
+   pobj: pGDBObjEntity;
+   pdev: PGDBObjDevice;
+   ir: itrec;
+   pvd, pvd2: pvardesk;
+   count: integer;
+begin
+   result := '-1';
+   count := 0;
+   pobj := drawings.GetCurrentROOT^.ObjArray.beginiterate(ir);
+   if pobj <> nil then
+   begin
+      repeat
+         inc(count);
+         if pobj^.GetObjType = GDBDeviceID then
+         begin
+            pdev := PGDBObjDevice(pobj);
+            pvd := FindVariableInEnt(pdev, 'NMO_Name');
+            if (pvd <> nil) and (iname = pstring(pvd^.data.Addr.Instance)^) then
+            begin
+               pvd2 := FindVariableInEnt(pdev, 'SLCABAGEN1_HeadDeviceName');
+               if (pvd2 <> nil) then
+               begin
+                  result := pString(FindVariableInEnt(pdev, 'SLCABAGEN1_HeadDeviceName')^.data.Addr.Instance)^ + '.' +
+                            pString(FindVariableInEnt(pdev, 'SLCABAGEN1_NGHeadDevice')^.data.Addr.Instance)^;
+                  // Found, can exit
+                  break;
+               end;
+            end;
+         end;
+         pobj := drawings.GetCurrentROOT^.ObjArray.iterate(ir);
+      until pobj = nil;
+   end;
 end;
 
 end.
