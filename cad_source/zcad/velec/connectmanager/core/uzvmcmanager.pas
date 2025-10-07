@@ -205,6 +205,13 @@ begin
   FAccessExporter.Connect;
   FAccessExporter.ClearTables;
 
+  // Export devices and connections from the drawing
+  FAccessExporter.ExportDevicesFromDrawing(FDeviceCollector);
+  FAccessExporter.ExportConnectionsFromDrawing(FDeviceCollector);
+
+  FAccessExporter.Commit;
+  ShowMessage('Экспорт в Access завершен успешно!');
+
   zcUI.TextMessage('Export to Access completed', TMWOHistoryOut);
 end;
 
