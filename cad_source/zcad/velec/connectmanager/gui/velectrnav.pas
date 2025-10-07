@@ -230,53 +230,6 @@ begin
     manager.Free;
   end;
 end;
-  TListStructCab=specialize TVector<TStructCab>;
-var
-  ODBCConnection: TODBCConnection;
-  Query: TSQLQuery;
-  Trans: TSQLTransaction;
-  listSructCab:TListStructCab;
-  i:integer;
-
-  Function getinfoheadcab(iname:string):string;
-  var
-    Query: TSQLQuery;
-    pobj: pGDBObjEntity;   //выделеные объекты в пространстве листа
-    pdev: PGDBObjBlockInsert;   //выделеные объекты в пространстве листа
-    ir:itrec;  // применяется для обработки списка выделений, но что это понятия не имею :)
-    pvd,pvd2:pvardesk;
-    i,count, count2:integer;
-    errorData:boolean;
-  begin
-    //Query := TSQLQuery.Create(nil);
-    try
-      //Query.Database := SQLite3Connection;
-      //ZCMsgCallBackInterface.TextMessage(' 1',TMWOHistoryOut);
-      // Insert records
-      //Query.SQL.Text := 'INSERT INTO dev (zcadid, devname, hdname, hdgroup, icanhd) VALUES (:zcadid, :devname, :hdname, :hdgroup, :icanhd)';
-      count:=0;
-      pobj:=drawings.GetCurrentROOT^.ObjArray.beginiterate(ir); //зона уже выбрана в перспективе застовлять пользователя ее выбирать
-      if pobj<>nil then
-        repeat
-           //errorData:=true;
-           inc(count);
-           //result:='-1';
-           // Определяем что это устройство
-           if pobj^.GetObjType=GDBDeviceID then
-             begin
-              pdev:=PGDBObjDevice(pobj);
-              //zcUI.TextMessage('Tewerqwrqwrqst data added to "dev" table',TMWOHistoryOut);
-              //Query.Params.ParamByName('zcadid').AsInteger:=count;
-              pvd:=FindVariableInEnt(pdev,'NMO_Name');
-              if (pvd<>nil) then
-                if (iname=pstring(pvd^.data.Addr.Instance)^) then
-                  begin
-
-                    pvd2:=FindVariableInEnt(pdev,'SLCABAGEN1_HeadDeviceName');
-                     if (pvd2<>nil) then begin
-                       zcUI.TextMessage(iname+ '=111111111111111111111111=' + pstring(pvd^.data.Addr.Instance)^,TMWOHistoryOut);
-                       result:= pString(FindVariableInEnt(pdev,'SLCABAGEN1_HeadDeviceName')^.data.Addr.Instance)^ + '.' + pString(FindVariableInEnt(pdev,'SLCABAGEN1_NGHeadDevice')^.data.Addr.Instance)^
-                     end;
                   end;
              end;
           pobj:=drawings.GetCurrentROOT^.ObjArray.iterate(ir); //переход к следующем примитиву в списке выбраных примитивов
