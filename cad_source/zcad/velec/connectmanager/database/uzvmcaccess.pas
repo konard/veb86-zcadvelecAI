@@ -58,7 +58,11 @@ begin
   FQuery := TSQLQuery.Create(nil);
   FTransaction := TSQLTransaction.Create(nil);
 
+  {$IFDEF WINDOWS}
   FConnection.Driver := 'Microsoft Access Driver (*.mdb, *.accdb)';
+  {$ELSE}
+  FConnection.Driver := 'MDB';
+  {$ENDIF}
   FConnection.LoginPrompt := False;
 end;
 
@@ -74,17 +78,29 @@ end;
 procedure TAccessDBExporter.Connect;
 begin
   FConnection.Params.Clear;
+  {$IFDEF WINDOWS}
   FConnection.Params.Add('Dbq=' + FDatabasePath);
+  {$ELSE}
+  FConnection.Params.Add('File=' + FDatabasePath);
+  {$ENDIF}
   if FConnection.Connected then
     Exit;
 
-  FConnection.Connected := True;
+  try
+    FConnection.Connected := True;
 
-  FTransaction.DataBase := FConnection;
-  FQuery.DataBase := FConnection;
-  FQuery.Transaction := FTransaction;
+    FTransaction.DataBase := FConnection;
+    FQuery.DataBase := FConnection;
+    FQuery.Transaction := FTransaction;
 
-  zcUI.TextMessage('Connected to Access database: ' + FDatabasePath, TMWOHistoryOut);
+    zcUI.TextMessage('Connected to Access database: ' + FDatabasePath, TMWOHistoryOut);
+  except
+    on E: Exception do
+    begin
+      zcUI.TextMessage('Failed to connect to Access database: ' + E.Message, TMWOShowError);
+      raise;
+    end;
+  end;
 end;
 
 procedure TAccessDBExporter.Disconnect;
