@@ -26,7 +26,7 @@ uses
   uzeentdevice, uzeentblockinsert, uzeentity, uzeconsts,
   uzcdrawing, uzcdrawings, uzcvariablesutils,
   varmandef, gzctnrVectorTypes,
-  uzvmcstruct, uzccablemanager, uzcentcable, uzegeometry,
+  uzvmcstruct, uzvmchierarchy, uzccablemanager, uzcentcable, uzegeometry,
   uzglviewareadata, uzcsysvars, uzeentityfactory, uzcutils,
   uzeroot, uzcenitiesvariablesextender, uzccomelectrical,
   uzgldrawcontext,uzeEntBase, uzcinterface,uzegeometrytypes;
@@ -277,51 +277,90 @@ var
   pdev: PGDBObjDevice;
   deviceStruct: TVElectrDevStruct;
   i,count: integer;
+  hierarchyBuilder: THierarchyBuilder;
+  allDevices: specialize TVector<TDeviceData>;
+  j: integer;
 begin
   // Создание результирующего списка структур устройств
   Result := TListVElectrDevStruct.Create;
 
-  // Получение списка всех устройств с чертежа
-  devicesList := GetAllGDBDevices;
-
+  // Создание построителя иерархии
+  hierarchyBuilder := THierarchyBuilder.Create;
   try
-    // Преобразование каждого устройства в структуру TVElectrDevStruct
-    for i := 0 to devicesList.Size - 1 do
-    begin
-      pdev := devicesList[i];
+    // Получение всех устройств с их подключениями для построения иерархии
+    allDevices := getAllCollectDevices;
 
-      // Заполнение структуры данными устройства
-      deviceStruct.zcadid := GetDeviceZcadId(pdev);
-      deviceStruct.fullname := GetDeviceFullName(pdev);
-      deviceStruct.basename := GetDeviceBaseName(pdev);
-      deviceStruct.realname := GetDeviceRealName(pdev);
-      deviceStruct.canbehead := GetDeviceCanBeHead(pdev);
-      deviceStruct.devtype := GetDeviceDevType(pdev);
-      deviceStruct.opmode := GetDeviceOpMode(pdev);
-      deviceStruct.power := GetDevicePower(pdev);
-      deviceStruct.voltage := GetDeviceVoltage(pdev);
-      deviceStruct.cosfi := GetDeviceCosFi(pdev);
-      deviceStruct.phase := GetDevicePhase(pdev);
+    try
+      // Первый проход: добавляем головные устройства с корневым родителем
+      for j := 0 to allDevices.Size - 1 do
+      begin
+        if allDevices[j].HDName <> '' then
+          hierarchyBuilder.AddDevice(allDevices[j].HDName, 'root', allDevices[j].CanBeHead);
+      end;
 
-      count:=1;
+      // Второй проход: добавляем устройства с их головными устройствами в качестве родителя
+      for j := 0 to allDevices.Size - 1 do
+      begin
+        if allDevices[j].HDName <> '' then
+          hierarchyBuilder.AddDevice(allDevices[j].DevName, allDevices[j].HDName, allDevices[j].CanBeHead);
+      end;
 
-      deviceStruct.headdev := GetDeviceHeadDev(pdev,count);
-      while (deviceStruct.headdev<>'ERROR') do
-        begin
-          deviceStruct.tracename := GetDeviceTraceName(pdev,count);
-          deviceStruct.feedernum := GetDeviceFeederNum(pdev,count);
+      // Построение полной иерархии и иерархии только головных устройств
+      hierarchyBuilder.BuildFullHierarchy;
+      hierarchyBuilder.BuildOnlyHDHierarchy;
+    finally
+      allDevices.Free;
+    end;
 
-          // Добавление структуры в результирующий список
-          Result.PushBack(deviceStruct);
+    // Получение списка всех устройств с чертежа
+    devicesList := GetAllGDBDevices;
 
-          //zcUI.TextMessage('Количество выбранных примитивов: ' + inttostr(count) + ' шт.',TMWOHistoryOut);
-          inc(count);
-          deviceStruct.headdev := GetDeviceHeadDev(pdev,count);
-        end;
+    try
+      // Преобразование каждого устройства в структуру TVElectrDevStruct
+      for i := 0 to devicesList.Size - 1 do
+      begin
+        pdev := devicesList[i];
+
+        // Заполнение структуры данными устройства
+        deviceStruct.zcadid := GetDeviceZcadId(pdev);
+        deviceStruct.fullname := GetDeviceFullName(pdev);
+        deviceStruct.basename := GetDeviceBaseName(pdev);
+        deviceStruct.realname := GetDeviceRealName(pdev);
+        deviceStruct.canbehead := GetDeviceCanBeHead(pdev);
+        deviceStruct.devtype := GetDeviceDevType(pdev);
+        deviceStruct.opmode := GetDeviceOpMode(pdev);
+        deviceStruct.power := GetDevicePower(pdev);
+        deviceStruct.voltage := GetDeviceVoltage(pdev);
+        deviceStruct.cosfi := GetDeviceCosFi(pdev);
+        deviceStruct.phase := GetDevicePhase(pdev);
+
+        count:=1;
+
+        deviceStruct.headdev := GetDeviceHeadDev(pdev,count);
+        while (deviceStruct.headdev<>'ERROR') do
+          begin
+            deviceStruct.tracename := GetDeviceTraceName(pdev,count);
+            deviceStruct.feedernum := GetDeviceFeederNum(pdev,count);
+
+            // Получение иерархических путей из построителя иерархии
+            deviceStruct.pathHD := hierarchyBuilder.GetDeviceWay(deviceStruct.fullname);
+            deviceStruct.fullpathHD := hierarchyBuilder.GetDeviceFullWay(deviceStruct.fullname);
+
+            // Добавление структуры в результирующий список
+            Result.PushBack(deviceStruct);
+
+            //zcUI.TextMessage('Количество выбранных примитивов: ' + inttostr(count) + ' шт.',TMWOHistoryOut);
+            inc(count);
+            deviceStruct.headdev := GetDeviceHeadDev(pdev,count);
+          end;
+      end;
+    finally
+      // Освобождение списка указателей на устройства
+      devicesList.Free;
     end;
   finally
-    // Освобождение списка указателей на устройства
-    devicesList.Free;
+    // Освобождение построителя иерархии
+    hierarchyBuilder.Free;
   end;
 end;
 
