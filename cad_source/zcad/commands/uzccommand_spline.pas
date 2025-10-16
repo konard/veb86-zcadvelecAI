@@ -197,11 +197,12 @@ begin
       params[i]:=i/(Length(points)-1);
 end;
 
-// Generate uniform knot vector
-procedure GenerateKnotVector(n,p:integer;var knots:array of single);
+// Generate knot vector using averaging method
+procedure GenerateKnotVector(n,p:integer;const params:array of single;var knots:array of single);
 var
-  i:integer;
+  i,j:integer;
   m:integer;
+  sum:single;
 begin
   m:=n+p+1;
 
@@ -209,8 +210,14 @@ begin
   for i:=0 to p do
     knots[i]:=0.0;
 
-  for i:=p+1 to n do
-    knots[i]:=(i-p)/(n-p+1);
+  // Internal knots: average p consecutive parameter values
+  // knots[j] = (params[j-p] + params[j-p+1] + ... + params[j-1]) / p
+  for j:=p+1 to n do begin
+    sum:=0.0;
+    for i:=j-p to j-1 do
+      sum:=sum+params[i];
+    knots[j]:=sum/p;
+  end;
 
   for i:=n+1 to m do
     knots[i]:=1.0;
@@ -327,7 +334,7 @@ begin
 
   // Generate knot vector for n control points and given degree
   SetLength(knots,n+ADegree+1);
-  GenerateKnotVector(n-1,ADegree,knots);
+  GenerateKnotVector(n-1,ADegree,params,knots);
 
   // Build coefficient matrix N where N[i][j] = BasisFunction(j, degree, params[i])
   // This represents the system: sum(N[i][j] * P[j]) = D[i]
