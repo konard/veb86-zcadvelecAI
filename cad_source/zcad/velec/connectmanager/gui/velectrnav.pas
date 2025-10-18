@@ -214,8 +214,9 @@ begin
     vstDev.OnGetText := @vstDevGetText;
     vstDev.OnPaintText := @vstDevPaintText;
     vstDev.OnClick := @vstDevClick;
-    vstDev.OnEditing := @vstDevEditing;
-    vstDev.OnNewText := @vstDevNewText;
+    // Редактирование отключено (issue #264)
+    // vstDev.OnEditing := @vstDevEditing;
+    // vstDev.OnNewText := @vstDevNewText;
 
   finally
     mcManager.Free;
@@ -310,74 +311,74 @@ begin
       vstDev.TreeOptions.SelectionOptions :=
         vstDev.TreeOptions.SelectionOptions + [toFullRowSelect, toExtendedFocus];
       vstDev.TreeOptions.MiscOptions :=
-        vstDev.TreeOptions.MiscOptions + [toEditable, toEditOnDblClick, toGridExtensions];
+        vstDev.TreeOptions.MiscOptions + [toGridExtensions];
       vstDev.Header.Options :=
         vstDev.Header.Options + [hoVisible, hoColumnResize] - [hoAutoResize];
       vstDev.Header.AutoSizeIndex := -1;
       vstDev.Header.MainColumn := 0; // Колонка 0 содержит индикаторы дерева (+/-)
 
-      // Колонка "Имя устройства" (редактируемая)
+      // Колонка "Имя устройства"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'devname';
         Width := 100;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Реальное имя" (редактируемая)
+      // Колонка "Реальное имя"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'realname';
         Width := 100;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Мощность" (редактируемая)
+      // Колонка "Мощность"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'Power';
         Width := 80;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "cosF" (редактируемая)
+      // Колонка "cosF"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'cosF';
         Width := 80;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Напряжение" (редактируемая)
+      // Колонка "Напряжение"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'Voltage';
         Width := 80;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Phase" (редактируемая)
+      // Колонка "Phase"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'Phase';
         Width := 80;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Головное устройство" (редактируемая)
+      // Колонка "Головное устройство"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'hdname';
         Width := 100;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
-      // Колонка "Группа" (редактируемая)
+      // Колонка "Группа"
       with vstDev.Header.Columns.Add do
       begin
         Text := 'hdgroup';
         Width := 50;
-        Options := Options + [coAllowFocus, coEditable];
+        Options := Options + [coAllowFocus];
       end;
 
       // Колонка "pathHD" (путь головного устройства)
