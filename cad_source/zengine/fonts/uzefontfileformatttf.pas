@@ -171,7 +171,7 @@ begin
   bs.EndCountur;
 end;
 begin
-  k:=pttf.TTFImpl.TTFImplDummyGlobalScale/pttf.TTFImpl.CapHeight;
+  k:=pttf.TTFImpl.TTFImplDummyGlobalScale * (pttf.TTFImplementation.Ascent + pttf.TTFImplementation.Descent) / pttf.TTFImpl.CapHeight;
   BS.VectorData:=@pttf.FontData;
   BS.fmode:=TSM_WaitStartCountur;
 
