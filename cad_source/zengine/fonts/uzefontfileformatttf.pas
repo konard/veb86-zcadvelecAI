@@ -171,7 +171,17 @@ begin
   bs.EndCountur;
 end;
 begin
-  k:=pttf.TTFImpl.TTFImplDummyGlobalScale/pttf.TTFImpl.CapHeight;
+  // ИСПРАВЛЕНИЕ #306: Используем тот же коэффициент масштабирования, что и для GDI рендеринга
+  // FIX #306: Use the same scaling coefficient as used for GDI rendering
+  // Было: k:=pttf.TTFImpl.TTFImplDummyGlobalScale/pttf.TTFImpl.CapHeight;
+  // Was: k:=pttf.TTFImpl.TTFImplDummyGlobalScale/pttf.TTFImpl.CapHeight;
+  // Проблема: TTFImplDummyGlobalScale и (Ascent+Descent) - разные базовые размеры
+  // Problem: TTFImplDummyGlobalScale and (Ascent+Descent) are different base sizes
+  // что приводит к непропорциональному масштабированию межсимвольных расстояний
+  // which causes disproportionate scaling of character spacing
+  // Решение: используем (Ascent+Descent)/CapHeight как в SetupSymbolLineParams (строка 262)
+  // Solution: use (Ascent+Descent)/CapHeight as in SetupSymbolLineParams (line 262)
+  k:=(pttf.TTFImpl.Ascent+pttf.TTFImpl.Descent)/pttf.TTFImpl.CapHeight;
   BS.VectorData:=@pttf.FontData;
   BS.fmode:=TSM_WaitStartCountur;
 
