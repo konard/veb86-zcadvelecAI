@@ -134,6 +134,8 @@ begin
     vstDev.Parent := PanelData;
     vstDev.Align := alTop;
     vstDev.NodeDataSize := SizeOf(TGridNodeData);
+    // Отключаем стандартное popup меню (оно будет отображаться вручную в vstDevMouseUp)
+    vstDev.PopupMenu := nil;
 
 
     except
@@ -578,7 +580,7 @@ begin
     // Parent nodes have children
     if vstDev.HasChildren[Node] then
     begin
-      P := vstDev.ClientToScreen(Point.Create(X, Y));
+      P := vstDev.ClientToScreen(Point(X, Y));
       FContainerPopupMenu.Popup(P.X, P.Y);
     end;
   end;
