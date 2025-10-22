@@ -650,14 +650,15 @@ begin
   txtSy:=TQtFont(PGDBfont(PSymbolsParam.pfont)^.DummyDrawerHandle).Metrics.descent;
   txtSy:=TQtFont(PGDBfont(PSymbolsParam.pfont)^.DummyDrawerHandle).Metrics.height;}
 
-  // ИСПРАВЛЕНИЕ #306: Корректный расчет высоты шрифта для GDI
-  // FIX #306: Correct font height calculation for GDI
+  // ИСПРАВЛЕНИЕ #306 и #310: Корректный расчет высоты шрифта для GDI
+  // FIX #306 and #310: Correct font height calculation for GDI
   // Теперь коэффициент масштабирования согласован с uzefontfileformatttf.pas:184
   // Now the scaling coefficient is consistent with uzefontfileformatttf.pas:184
   // Оба используют (Ascent+Descent)/CapHeight, что обеспечивает пропорциональное масштабирование
   // Both use (Ascent+Descent)/CapHeight, which ensures proportional scaling
+  // Это решение из #306 делает компенсирующий workaround из #310 ненужным
+  // This solution from #306 makes the compensating workaround from #310 unnecessary
   txtSy:=PSymbolsParam^.NeededFontHeight/(rc.DrawingContext.zoom)/(deffonth);
-
   {$IF DEFINED(LCLQt) OR DEFINED(LCLQt5)}txtSy:=txtSy*(deffonth)/(TQtFont(PGDBfont(PSymbolsParam.pfont)^.DummyDrawerHandle).Metrics.height-1);{$ENDIF}
   txtSx:=txtSy*PSymbolsParam^.sx;
 
