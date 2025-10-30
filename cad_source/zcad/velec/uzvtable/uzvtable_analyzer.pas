@@ -40,6 +40,7 @@ type
     startPos: Double;     // Начальная позиция вдоль линии
     endPos: Double;       // Конечная позиция вдоль линии
   end;
+  PLineData = ^TLineData;
   TLineList = specialize TVector<TLineData>;
 
 // Построить структуру таблицы из списка примитивов
@@ -157,13 +158,13 @@ var
   i: Integer;
   primitive: PUzvPrimitiveItem;
 begin
-  aHorizontalLines:= TLineList.Create;
-  aVerticalLines:= TLineList.Create;;
+  aHorizontalLines.init;
+  aVerticalLines.init;
 
   // Перебираем все примитивы
   for i := 0 to aPrimitives.Size - 1 do
   begin
-    primitive := aPrimitives.Mutable[i];
+    primitive := aPrimitives.GetMutable(i);
     ExtractLinesFromPrimitive(primitive^, aHorizontalLines, aVerticalLines);
   end;
 
@@ -211,14 +212,14 @@ begin
   // Собираем уникальные позиции горизонтальных линий
   for i := 0 to aHorizontalLines.Size - 1 do
   begin
-    line := aHorizontalLines.Mutable[i];
+    line := aHorizontalLines.GetMutable(i);
     FindOrAddPosition(horizontalPositions, hCount, line^.position);
   end;
 
   // Собираем уникальные позиции вертикальных линий
   for i := 0 to aVerticalLines.Size - 1 do
   begin
-    line := aVerticalLines.Mutable[i];
+    line := aVerticalLines.GetMutable(i);
     FindOrAddPosition(verticalPositions, vCount, line^.position);
   end;
 
@@ -227,7 +228,7 @@ begin
   SortPositions(verticalPositions, vCount);
 
   // Создаем строки (между горизонтальными линиями)
-  aTable.rows:=TUzvTableRowList.Create;
+  aTable.rows.init;
   for i := 0 to hCount - 2 do
   begin
     row.rowIndex := i;
@@ -241,7 +242,7 @@ begin
   end;
 
   // Создаем столбцы (между вертикальными линиями)
-  aTable.columns:=TUzvTableColumnList.Create;
+  aTable.columns.init;
   for i := 0 to vCount - 2 do
   begin
     col.columnIndex := i;
@@ -271,16 +272,16 @@ var
   row: PUzvTableRow;
   col: PUzvTableColumn;
 begin
-  aTable.cells:=TUzvTableCellList.Create;
+  aTable.cells.init;
 
   // Создаем ячейки для каждой комбинации строка/столбец
   for i := 0 to aTable.rows.Size - 1 do
   begin
-    row := aTable.rows.Mutable[i];
+    row := aTable.rows.GetMutable(i);
 
     for j := 0 to aTable.columns.Size - 1 do
     begin
-      col := aTable.columns.Mutable[j];
+      col := aTable.columns.GetMutable(j);
 
       // Создаем пустую ячейку
       cell := CreateEmptyCell(i, j);
@@ -307,7 +308,7 @@ begin
 
   for i := 0 to aTable.cells.Size - 1 do
   begin
-    cell := aTable.cells.Mutable[i];
+    cell := aTable.cells.GetMutable(i);
 
     if IsPointInCell(aPoint, cell^) then
     begin
@@ -331,7 +332,7 @@ begin
   // Перебираем все примитивы
   for i := 0 to aPrimitives.Size - 1 do
   begin
-    primitive := aPrimitives.Mutable[i];
+    primitive := aPrimitives.GetMutable(i);
 
     // Обрабатываем только текстовые примитивы
     if primitive^.primitiveType in [ptText, ptMText] then
@@ -352,7 +353,7 @@ begin
 
       if cellIndex >= 0 then
       begin
-        cell := aTable.cells.Mutable[cellIndex];
+        cell := aTable.cells.GetMutable(cellIndex);
 
         // Добавляем текст к содержимому ячейки
         if cell^.textContent <> '' then
@@ -383,16 +384,16 @@ begin
   end;
 
   // Находим минимальные и максимальные координаты
-  col := aTable.columns.Mutable[0];
+  col := aTable.columns.GetMutable(0);
   minX := col^.leftPosition;
 
-  col := aTable.columns.Mutable[aTable.columns.Size - 1];
+  col := aTable.columns.GetMutable(aTable.columns.Size - 1);
   maxX := col^.rightPosition;
 
-  row := aTable.rows.Mutable[0];
+  row := aTable.rows.GetMutable(0);
   minY := row^.bottomPosition;
 
-  row := aTable.rows.Mutable[aTable.rows.Size - 1];
+  row := aTable.rows.GetMutable(aTable.rows.Size - 1);
   maxY := row^.topPosition;
 
   aTable.tableBounds.LBN := CreateVertex(minX, minY, 0);
@@ -470,8 +471,8 @@ begin
 
   finally
     // Освобождаем временные списки
-    horizontalLines.Done;
-    verticalLines.Done;
+    horizontalLines.done;
+    verticalLines.done;
   end;
 end;
 
