@@ -186,9 +186,9 @@ var
   tempCells: TUzvTableCellList;
 begin
   // Инициализация векторов через временные переменные
-  tempRows.init(10);
-  tempColumns.init(10);
-  tempCells.init(100);
+  tempRows.init;
+  tempColumns.init;
+  tempCells.init;
 
   Result.rows := tempRows;
   Result.columns := tempColumns;
