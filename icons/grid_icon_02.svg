@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="24" viewBox="0 0 16 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>Grid Icon 02</title>
+  <desc>3x2 grid icon with checkerboard pattern</desc>
+
+  <!-- Определение стилей -->
+  <defs>
+    <style type="text/css">
+      .grid-border { fill: none; stroke: #20A8FF; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+      .cell-fill { fill: #008C00; stroke: none; }
+    </style>
+  </defs>
+
+  <!-- Заливка ячеек (шахматный порядок) -->
+  <rect class="cell-fill" x="1" y="1" width="6" height="6" />
+  <rect class="cell-fill" x="9" y="9" width="6" height="6" />
+  <rect class="cell-fill" x="1" y="17" width="6" height="6" />
+
+  <!-- Внешняя граница -->
+  <rect class="grid-border" x="1" y="1" width="14" height="22" />
+
+  <!-- Вертикальная линия -->
+  <line class="grid-border" x1="8" y1="1" x2="8" y2="23" />
+
+  <!-- Горизонтальные линии -->
+  <line class="grid-border" x1="1" y1="8" x2="15" y2="8" />
+  <line class="grid-border" x1="1" y1="16" x2="15" y2="16" />
+</svg>
