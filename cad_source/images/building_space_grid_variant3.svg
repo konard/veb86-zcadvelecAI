@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Вариант 3: Сетка 3x2 с тонкими линиями и полупрозрачной заливкой -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   version="1.1">
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <rdf:Description>
+        <dc:title>Building Space Grid Icon - Variant 3</dc:title>
+        <dc:description>Сетка 3x2 с тонкими линиями</dc:description>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Заливка ячеек с прозрачностью -->
+  <rect style="fill:#008C00;fill-opacity:0.7" x="1.5" y="1.5" width="5.5" height="4" />
+  <rect style="fill:#008C00;fill-opacity:0.7" x="9" y="1.5" width="5.5" height="4" />
+  <rect style="fill:#008C00;fill-opacity:0.7" x="1.5" y="6.5" width="5.5" height="4" />
+  <rect style="fill:#008C00;fill-opacity:0.7" x="9" y="6.5" width="5.5" height="4" />
+  <rect style="fill:#008C00;fill-opacity:0.7" x="1.5" y="11.5" width="5.5" height="3" />
+  <rect style="fill:#008C00;fill-opacity:0.7" x="9" y="11.5" width="5.5" height="3" />
+
+  <!-- Внешняя рамка -->
+  <rect
+    style="fill:none;stroke:#20A8FF;stroke-width:0.8;stroke-linecap:round;stroke-linejoin:round"
+    x="1.5"
+    y="1.5"
+    width="13"
+    height="13" />
+
+  <!-- Вертикальная линия -->
+  <line
+    style="stroke:#20A8FF;stroke-width:0.6;stroke-linecap:round"
+    x1="8" y1="1.5"
+    x2="8" y2="14.5" />
+
+  <!-- Горизонтальные линии -->
+  <line
+    style="stroke:#20A8FF;stroke-width:0.6;stroke-linecap:round"
+    x1="1.5" y1="5.5"
+    x2="14.5" y2="5.5" />
+  <line
+    style="stroke:#20A8FF;stroke-width:0.6;stroke-linecap:round"
+    x1="1.5" y1="10.5"
+    x2="14.5" y2="10.5" />
+</svg>

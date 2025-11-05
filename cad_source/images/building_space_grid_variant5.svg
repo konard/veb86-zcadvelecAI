@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Вариант 5: Сетка 3x2 с небольшими отступами между ячейками -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   version="1.1">
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <rdf:Description>
+        <dc:title>Building Space Grid Icon - Variant 5</dc:title>
+        <dc:description>Сетка 3x2 с отступами между ячейками</dc:description>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Заливка ячеек с небольшими отступами -->
+  <!-- Верхний ряд -->
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="1.8" y="1.8" width="5.3" height="3.5" />
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="8.9" y="1.8" width="5.3" height="3.5" />
+  <!-- Средний ряд -->
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="1.8" y="6.3" width="5.3" height="3.5" />
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="8.9" y="6.3" width="5.3" height="3.5" />
+  <!-- Нижний ряд -->
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="1.8" y="10.8" width="5.3" height="2.9" />
+  <rect style="fill:#008C00;stroke:#20A8FF;stroke-width:1.0" x="8.9" y="10.8" width="5.3" height="2.9" />
+
+  <!-- Внешняя рамка -->
+  <rect
+    style="fill:none;stroke:#20A8FF;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round"
+    x="1.3"
+    y="1.3"
+    width="13.4"
+    height="13.4" />
+</svg>
