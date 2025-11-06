@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка распознавания таблиц: круг и таблица 2x2 с объединенными верхними ячейками -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg3"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs3" />
+  <metadata id="metadata3">
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <rdf:Description>
+        <dc:title>Table Recognition Icon - Variant 3</dc:title>
+        <dc:description>Иконка распознавания таблиц - вариант 3: таблица с увеличенным размером</dc:description>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Жирный круг синего цвета -->
+  <circle
+     style="fill:none;stroke:#20a8ff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round"
+     cx="24"
+     cy="24"
+     r="22"
+     id="outer-circle" />
+
+  <!-- Таблица 2x2 с объединенными верхними ячейками (больший размер) -->
+  <!-- Внешняя рамка таблицы -->
+  <rect
+     style="fill:none;stroke:#008c00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+     x="10"
+     y="10"
+     width="28"
+     height="28"
+     id="table-border" />
+
+  <!-- Вертикальная линия (разделяет левую и правую колонки) -->
+  <line
+     style="stroke:#008c00;stroke-width:2;stroke-linecap:round"
+     x1="24"
+     y1="24"
+     x2="24"
+     y2="38"
+     id="vertical-line" />
+
+  <!-- Горизонтальная линия (разделяет верхнюю объединенную ячейку и нижние) -->
+  <line
+     style="stroke:#008c00;stroke-width:2;stroke-linecap:round"
+     x1="10"
+     y1="24"
+     x2="38"
+     y2="24"
+     id="horizontal-line" />
+</svg>
