@@ -91,12 +91,4 @@ Original repository (upstream): veb86/zcadvelecAI
 
 Pull request description was edited after last commit
 
-⚠️ UNCOMMITTED CHANGES DETECTED:
-The following uncommitted changes were found in the repository:
-
-  M opencode_prompt.txt
-
-Please review and handle these changes appropriately.
-Consider committing important changes or cleaning up unnecessary files.
-
 Continue.
