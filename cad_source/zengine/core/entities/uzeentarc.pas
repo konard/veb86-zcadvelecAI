@@ -184,9 +184,11 @@ begin
      Format('Нормаль (Local.basis.oz): X=%.6f, Y=%.6f, Z=%.6f',
     [Local.basis.oz.x, Local.basis.oz.y, Local.basis.oz.z])
     ,TMWOHistoryOut);
-  zcUI.TextMessage(
-     Format('Матрица трансформации: det=%.6f',
-    [t_matrix.mtr[0].v[0]*t_matrix.mtr[1].v[1]*t_matrix.mtr[2].v[2]])
+   zcUI.TextMessage(
+      Format('Матрица трансформации: det=%.6f',
+     [MatrixDetInternal(t_matrix.mtr[0].v[0], t_matrix.mtr[0].v[1], t_matrix.mtr[0].v[2],
+                        t_matrix.mtr[1].v[0], t_matrix.mtr[1].v[1], t_matrix.mtr[1].v[2],
+                        t_matrix.mtr[2].v[0], t_matrix.mtr[2].v[1], t_matrix.mtr[2].v[2])])
     ,TMWOHistoryOut);
 
   { Сохранить исходную локальную СК до трансформации }
@@ -195,7 +197,9 @@ begin
   old_basis_oz := Local.basis.oz;
 
   precalc;
-  if t_matrix.mtr[0].v[0]*t_matrix.mtr[1].v[1]*t_matrix.mtr[2].v[2]<eps then begin
+  if MatrixDetInternal(t_matrix.mtr[0].v[0], t_matrix.mtr[0].v[1], t_matrix.mtr[0].v[2],
+                       t_matrix.mtr[1].v[0], t_matrix.mtr[1].v[1], t_matrix.mtr[1].v[2],
+                       t_matrix.mtr[2].v[0], t_matrix.mtr[2].v[1], t_matrix.mtr[2].v[2]) < eps then begin
     sav:=q2;
     eav:=q0;
     //zDebugLn('Определитель < eps: меняем местами начальную и конечную точки');
