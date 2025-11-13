@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка: кабель со знаком плюс (добавление подключения) -->
+<!-- Вариант 3: жирные линии -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1">
+  <defs id="defs1" />
+
+  <!-- Кабель в виде змейки -->
+  <path
+     style="fill:none;stroke:#20A8FF;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"
+     d="M 8,12 L 12,12 L 16,20 L 20,12 L 24,20 L 28,12 L 32,20 L 36,12 L 40,12"
+     id="cable" />
+
+  <!-- Знак плюс -->
+  <g id="plus">
+    <line
+       style="fill:none;stroke:#008C00;stroke-width:3.5;stroke-linecap:round"
+       x1="24"
+       y1="28"
+       x2="24"
+       y2="40"
+       id="plus-vertical" />
+    <line
+       style="fill:none;stroke:#008C00;stroke-width:3.5;stroke-linecap:round"
+       x1="18"
+       y1="34"
+       x2="30"
+       y2="34"
+       id="plus-horizontal" />
+  </g>
+</svg>

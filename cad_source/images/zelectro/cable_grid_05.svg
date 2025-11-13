@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка: кабель со знаком сетки (открытие менеджера подключений) -->
+<!-- Вариант 5: компактный с большой сеткой -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1">
+  <defs id="defs1" />
+
+  <!-- Кабель в виде змейки -->
+  <path
+     style="fill:none;stroke:#20A8FF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"
+     d="M 6,10 L 10,10 L 14,18 L 18,10 L 22,18 L 26,10 L 30,18 L 34,10 L 38,10 L 42,10"
+     id="cable" />
+
+  <!-- Сетка (3x3 ячейки, больший размер) -->
+  <g id="grid" style="fill:none;stroke:#008C00;stroke-width:1.8;stroke-linecap:round">
+    <!-- Вертикальные линии -->
+    <line x1="17" y1="24" x2="17" y2="42" />
+    <line x1="24" y1="24" x2="24" y2="42" />
+    <line x1="31" y1="24" x2="31" y2="42" />
+    <!-- Горизонтальные линии -->
+    <line x1="12" y1="30" x2="36" y2="30" />
+    <line x1="12" y1="33" x2="36" y2="33" />
+    <line x1="12" y1="36" x2="36" y2="36" />
+    <!-- Внешний контур -->
+    <rect x="12" y="24" width="24" height="18" />
+  </g>
+</svg>
