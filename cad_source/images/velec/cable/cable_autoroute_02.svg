@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка автопрокладки кабеля - вариант 2 (средняя линия, зеленый штекер) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg_cable_02">
+  <defs id="defs2" />
+  <metadata id="metadata2">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Cable Auto-routing Icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Круглый кабель (Уроборос) - средняя линия -->
+  <circle
+     cx="128"
+     cy="128"
+     r="90"
+     style="fill:none;stroke:#20A8FF;stroke-width:18;stroke-opacity:1" />
+
+  <!-- Внутренний декоративный круг -->
+  <circle
+     cx="128"
+     cy="128"
+     r="70"
+     style="fill:none;stroke:#20A8FF;stroke-width:4;stroke-opacity:0.25" />
+
+  <!-- Электрический штекер (голова змея) - зеленый -->
+  <g id="plug" transform="translate(128, 38)">
+    <!-- Основание штекера -->
+    <rect
+       x="-15"
+       y="-15"
+       width="30"
+       height="25"
+       rx="3"
+       style="fill:#008C00;stroke:#006600;stroke-width:2" />
+    <!-- Контакты -->
+    <rect
+       x="-10"
+       y="10"
+       width="7"
+       height="12"
+       rx="1"
+       style="fill:#006600" />
+    <rect
+       x="3"
+       y="10"
+       width="7"
+       height="12"
+       rx="1"
+       style="fill:#006600" />
+    <!-- Провод от штекера -->
+    <rect
+       x="-9"
+       y="-35"
+       width="18"
+       height="23"
+       style="fill:#20A8FF" />
+  </g>
+
+  <!-- Буква А в центре -->
+  <text
+     x="128"
+     y="128"
+     style="font-style:normal;font-weight:bold;font-size:96px;font-family:sans-serif;text-align:center;text-anchor:middle;dominant-baseline:central;fill:#BE0000;fill-opacity:1">A</text>
+</svg>

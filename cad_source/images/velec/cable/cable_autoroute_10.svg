@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка автопрокладки кабеля - вариант 10 (комбинированный стиль, зеленый штекер с градиентом) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg_cable_10">
+  <defs id="defs10">
+    <!-- Радиальный градиент для кабеля -->
+    <radialGradient id="cableRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#60D0FF;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#20A8FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1090E0;stop-opacity:1" />
+    </radialGradient>
+    <!-- Градиент для штекера -->
+    <linearGradient id="plugGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00AA00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#006600;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <metadata id="metadata10">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Cable Auto-routing Icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Круглый кабель (Уроборос) с градиентом -->
+  <circle
+     cx="128"
+     cy="128"
+     r="90"
+     style="fill:none;stroke:url(#cableRadial);stroke-width:20;stroke-opacity:1" />
+
+  <!-- Внутренний подсвеченный круг -->
+  <circle
+     cx="128"
+     cy="128"
+     r="82"
+     style="fill:none;stroke:#60D0FF;stroke-width:3;stroke-opacity:0.6" />
+
+  <!-- Внешний подсвеченный круг -->
+  <circle
+     cx="128"
+     cy="128"
+     r="98"
+     style="fill:none;stroke:#1090E0;stroke-width:2;stroke-opacity:0.4" />
+
+  <!-- Электрический штекер (голова змея) - зеленый с градиентом -->
+  <g id="plug" transform="translate(128, 38)">
+    <!-- Основание штекера -->
+    <rect
+       x="-18"
+       y="-18"
+       width="36"
+       height="30"
+       rx="4"
+       style="fill:url(#plugGradient);stroke:#004400;stroke-width:2" />
+    <!-- Блик на штекере -->
+    <rect
+       x="-14"
+       y="-14"
+       width="10"
+       height="8"
+       rx="2"
+       style="fill:#00DD00;fill-opacity:0.6" />
+    <!-- Контакты -->
+    <rect
+       x="-12"
+       y="12"
+       width="8"
+       height="14"
+       rx="1"
+       style="fill:#004400" />
+    <rect
+       x="4"
+       y="12"
+       width="8"
+       height="14"
+       rx="1"
+       style="fill:#004400" />
+    <!-- Провод от штекера -->
+    <rect
+       x="-10"
+       y="-40"
+       width="20"
+       height="25"
+       style="fill:#20A8FF" />
+  </g>
+
+  <!-- Буква А в центре с обводкой -->
+  <text
+     x="128"
+     y="128"
+     style="font-style:normal;font-weight:bold;font-size:96px;font-family:sans-serif;text-align:center;text-anchor:middle;dominant-baseline:central;fill:none;stroke:#8B0000;stroke-width:3;stroke-opacity:1">A</text>
+  <text
+     x="128"
+     y="128"
+     style="font-style:normal;font-weight:bold;font-size:96px;font-family:sans-serif;text-align:center;text-anchor:middle;dominant-baseline:central;fill:#BE0000;fill-opacity:1">A</text>
+</svg>

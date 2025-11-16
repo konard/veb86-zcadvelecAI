@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Иконка автопрокладки кабеля - вариант 8 (пунктирная линия, зеленый штекер) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg_cable_08">
+  <defs id="defs8" />
+  <metadata id="metadata8">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Cable Auto-routing Icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+  <!-- Круглый кабель (Уроборос) - основная линия -->
+  <circle
+     cx="128"
+     cy="128"
+     r="90"
+     style="fill:none;stroke:#20A8FF;stroke-width:16;stroke-opacity:1" />
+
+  <!-- Пунктирный круг поверх -->
+  <circle
+     cx="128"
+     cy="128"
+     r="90"
+     style="fill:none;stroke:#40C8FF;stroke-width:6;stroke-dasharray:15,10;stroke-opacity:0.8" />
+
+  <!-- Электрический штекер (голова змея) - зеленый -->
+  <g id="plug" transform="translate(128, 38)">
+    <!-- Основание штекера -->
+    <rect
+       x="-17"
+       y="-17"
+       width="34"
+       height="28"
+       rx="4"
+       style="fill:#008C00;stroke:#006600;stroke-width:2" />
+    <!-- Контакты -->
+    <rect
+       x="-11"
+       y="11"
+       width="8"
+       height="13"
+       rx="1"
+       style="fill:#006600" />
+    <rect
+       x="3"
+       y="11"
+       width="8"
+       height="13"
+       rx="1"
+       style="fill:#006600" />
+    <!-- Блик на штекере -->
+    <ellipse
+       cx="0"
+       cy="-5"
+       rx="8"
+       ry="5"
+       style="fill:#00CC00;fill-opacity:0.4" />
+    <!-- Провод от штекера -->
+    <rect
+       x="-8"
+       y="-38"
+       width="16"
+       height="24"
+       style="fill:#20A8FF" />
+  </g>
+
+  <!-- Буква А в центре -->
+  <text
+     x="128"
+     y="128"
+     style="font-style:normal;font-weight:bold;font-size:96px;font-family:sans-serif;text-align:center;text-anchor:middle;dominant-baseline:central;fill:#BE0000;fill-opacity:1">A</text>
+</svg>
