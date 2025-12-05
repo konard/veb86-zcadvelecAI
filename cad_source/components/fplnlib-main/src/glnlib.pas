@@ -373,6 +373,9 @@ type
     Tnurbs_curve_equally_tessellate=procedure(curve:TLN_NurbsCurve;
       out_points:PXYZ;out_knots:PDouble;max_count:integer);cdecl;
 
+    { Удаление }
+    Tnurbs_curve_delete=procedure(curve:PLN_NurbsCurve);cdecl;
+
     { ========================================================================== }
     {             Типы указателей на функции NurbsSurface_CAPI                   }
     { ========================================================================== }
@@ -480,6 +483,9 @@ type
       integrator_type:integer):double;cdecl;
     Tnurbs_surface_triangulate=function(surface:TLN_NurbsSurface;
       resolution_u,resolution_v,use_delaunay:integer):TLNMesh;cdecl;
+
+    { Удаление }
+    Tnurbs_surface_delete=procedure(surface:PLN_NurbsSurface);cdecl;
 
     { ========================================================================== }
     {                   Глобальные указатели на функции                          }
@@ -672,6 +678,9 @@ type
       nurbs_curve_to_unclamp_curve:Tnurbs_curve_to_unclamp_curve;
       nurbs_curve_equally_tessellate:Tnurbs_curve_equally_tessellate;
 
+      { NurbsCurve_CAPI - Удаление }
+      nurbs_curve_delete:Tnurbs_curve_delete;
+
       { NurbsSurface_CAPI - Вычисление точек }
       nurbs_surface_get_point_on_surface:Tnurbs_surface_get_point_on_surface;
       nurbs_surface_compute_rational_derivatives:
@@ -734,6 +743,9 @@ type
       { NurbsSurface_CAPI - Площадь и триангуляция }
       nurbs_surface_approximate_area:Tnurbs_surface_approximate_area;
       nurbs_surface_triangulate:Tnurbs_surface_triangulate;
+
+      { NurbsSurface_CAPI - Удаление }
+      nurbs_surface_delete:Tnurbs_surface_delete;
 
     class constructor CreateRec;
       { ========================================================================== }
@@ -1113,6 +1125,9 @@ begin
     @nurbs_curve_to_unclamp_curve) and Result;
   Result:=LoadFuncAddr('nurbs_curve_equally_tessellate',
     @nurbs_curve_equally_tessellate) and Result;
+
+  { Удаление }
+  Result:=LoadFuncAddr('nurbs_curve_delete',@nurbs_curve_delete) and Result;
 end;
 
 {**
@@ -1212,6 +1227,9 @@ begin
     @nurbs_surface_approximate_area) and Result;
   Result:=LoadFuncAddr('nurbs_surface_triangulate',@nurbs_surface_triangulate) and
     Result;
+
+  { Удаление }
+  Result:=LoadFuncAddr('nurbs_surface_delete',@nurbs_surface_delete) and Result;
 end;
 
 {**
@@ -1375,6 +1393,7 @@ begin
   nurbs_curve_to_clamp_curve:=nil;
   nurbs_curve_to_unclamp_curve:=nil;
   nurbs_curve_equally_tessellate:=nil;
+  nurbs_curve_delete:=nil;
 
   { NurbsSurface_CAPI }
   nurbs_surface_get_point_on_surface:=nil;
@@ -1412,6 +1431,7 @@ begin
   nurbs_surface_create_coons:=nil;
   nurbs_surface_approximate_area:=nil;
   nurbs_surface_triangulate:=nil;
+  nurbs_surface_delete:=nil;
 end;
 class constructor gLNLibRec<gXYZ,gXYZW,gUV,gMatrix4d>.CreateRec;
 begin
