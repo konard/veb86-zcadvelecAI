@@ -149,6 +149,7 @@ begin
           currentFace.Vertex2 := 0;
           currentFace.Vertex3 := 0;
           currentFace.Vertex4 := 0;
+          programlog.LogOutFormatStr('uzeentpolyfacemesh: Начало обработки VERTEX записи', [], LM_Info);
         end
         else if s = 'SEQEND' then
           system.Break
@@ -162,10 +163,13 @@ begin
         // Обработка VERTEX сущностей
         if dxfLoadGroupCodeString(rdr,100,byt,s) then begin
           // Определяем подтип вершины по DXF классу
-          if s = 'AcDbPolyFaceMeshVertex' then
-            isPolyFaceVertex := True
-          else if s = 'AcDbFaceRecord' then
+          if s = 'AcDbPolyFaceMeshVertex' then begin
+            isPolyFaceVertex := True;
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Определен тип AcDbPolyFaceMeshVertex', [], LM_Info);
+          end else if s = 'AcDbFaceRecord' then begin
             isFaceRecord := True;
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Определен тип AcDbFaceRecord', [], LM_Info);
+          end;
         end
         else if dxfLoadGroupCodeInteger(rdr,70,byt,vertexFlags) then begin
           // Флаги вершины: 128 = face record, другие значения = vertex record
@@ -177,18 +181,32 @@ begin
             currentFace.Vertex2 := 0;
             currentFace.Vertex3 := 0;
             currentFace.Vertex4 := 0;
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Начата обработка грани (флаг=%d)', [vertexFlags], LM_Info);
+          end else begin
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Флаг вершины=%d (не грань)', [vertexFlags], LM_Info);
           end;
         end
         else if dxfLoadGroupCodeVertex(rdr,10,byt,currentVertex) then begin
           // Это начало координат вершины (код группы 10)
           // Не добавляем вершину сразу, ждем пока все координаты будут прочитаны
+          programlog.LogOutFormatStr('uzeentpolyfacemesh: Прочитана X координата: %.6f', [currentVertex.x], LM_Info);
+        end
+        else if dxfLoadGroupCodeVertex(rdr,20,byt,currentVertex) then begin
+          // Y координата вершины (код группы 20)
+          programlog.LogOutFormatStr('uzeentpolyfacemesh: Прочитана Y координата: %.6f', [currentVertex.y], LM_Info);
         end
         else if dxfLoadGroupCodeVertex(rdr,30,byt,currentVertex) then begin
           // Z-координата вершины - все координаты прочитаны, можно добавлять вершину
+          programlog.LogOutFormatStr('uzeentpolyfacemesh: Прочитана Z координата: %.6f', [currentVertex.z], LM_Info);
+          // ВАЖНО: Добавляем вершину ТОЛЬКО если это PolyFaceMeshVertex, а не FaceRecord
           if isPolyFaceVertex and not isFaceRecord then begin
             // Это координаты вершины PolyFaceMesh (не грань)
             context.GDBVertexLoadCache.PushBackData(currentVertex);
-            programlog.LogOutFormatStr('uzeentpolyfacemesh: Добавлена вершина: (%.2f, %.2f, %.2f)', [currentVertex.x, currentVertex.y, currentVertex.z], LM_Info);
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Добавлена вершина #%d: (%.6f, %.6f, %.6f)', [context.GDBVertexLoadCache.Count, currentVertex.x, currentVertex.y, currentVertex.z], LM_Info);
+          end else if isFaceRecord then begin
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Пропуск координат FaceRecord: (%.6f, %.6f, %.6f)', [currentVertex.x, currentVertex.y, currentVertex.z], LM_Info);
+          end else begin
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Пропуск вершины с неопределенным типом: (%.6f, %.6f, %.6f)', [currentVertex.x, currentVertex.y, currentVertex.z], LM_Info);
           end;
         end
         else begin
@@ -198,18 +216,22 @@ begin
             if dxfLoadGroupCodeInteger(rdr,71,byt,vertexIndex) and (vertexIndex <> 0) then begin
               currentFace.Vertex1 := abs(vertexIndex);
               inc(currentFace.VertexCount);
+              programlog.LogOutFormatStr('uzeentpolyfacemesh: Грань - индекс вершины 1: %d', [currentFace.Vertex1], LM_Info);
             end
             else if dxfLoadGroupCodeInteger(rdr,72,byt,vertexIndex) and (vertexIndex <> 0) then begin
               currentFace.Vertex2 := abs(vertexIndex);
               inc(currentFace.VertexCount);
+              programlog.LogOutFormatStr('uzeentpolyfacemesh: Грань - индекс вершины 2: %d', [currentFace.Vertex2], LM_Info);
             end
             else if dxfLoadGroupCodeInteger(rdr,73,byt,vertexIndex) and (vertexIndex <> 0) then begin
               currentFace.Vertex3 := abs(vertexIndex);
               inc(currentFace.VertexCount);
+              programlog.LogOutFormatStr('uzeentpolyfacemesh: Грань - индекс вершины 3: %d', [currentFace.Vertex3], LM_Info);
             end
             else if dxfLoadGroupCodeInteger(rdr,74,byt,vertexIndex) and (vertexIndex <> 0) then begin
               currentFace.Vertex4 := abs(vertexIndex);
               inc(currentFace.VertexCount);
+              programlog.LogOutFormatStr('uzeentpolyfacemesh: Грань - индекс вершины 4: %d', [currentFace.Vertex4], LM_Info);
             end;
           end
           else begin
