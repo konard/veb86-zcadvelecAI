@@ -161,14 +161,17 @@ begin
           // Начинаем обработку новой VERTEX сущности
           isProcessingVertex := True;
           vertexFlags := 0;
-          isFaceRecord := False;
-          isPolyFaceVertex := False;
+          // Важно: не сбрасываем isFaceRecord и isPolyFaceVertex здесь,
+          // так как они будут определены позже по 100 или 70 группам кодов
           currentVertex := NulVertex;
-          currentFace.VertexCount := 0;
-          currentFace.Vertex1 := 0;
-          currentFace.Vertex2 := 0;
-          currentFace.Vertex3 := 0;
-          currentFace.Vertex4 := 0;
+          // Сбрасываем currentFace только если это не продолжение грани
+          if not isFaceRecord then begin
+            currentFace.VertexCount := 0;
+            currentFace.Vertex1 := 0;
+            currentFace.Vertex2 := 0;
+            currentFace.Vertex3 := 0;
+            currentFace.Vertex4 := 0;
+          end;
         end
         else if s = 'SEQEND' then begin
           // Завершаем обработку последней грани
@@ -208,9 +211,28 @@ begin
           end;
         end
         else if dxfLoadGroupCodeInteger(rdr,70,byt,vertexFlags) then begin
-          // Флаги вершины для дополнительной проверки: 128 = face record, 192 = 128+64 = polyface vertex
+          // Флаги вершины: 128 = face record, 192 = 128+64 = polyface vertex
           programlog.LogOutFormatStr('uzeentpolyfacemesh: Флаги вершины = %d', [vertexFlags], LM_Info);
-          // Основное определение типа идет по 100 коду группы, флаги используем для отладки
+          
+          // Если 100 группы кодов отсутствуют, используем флаги для определения типа
+          if (vertexFlags and 128) = 128 then begin
+            // Это запись грани (face record)
+            isFaceRecord := True;
+            isPolyFaceVertex := False;
+            // Начинаем новую грань
+            currentFace.VertexCount := 0;
+            currentFace.Vertex1 := 0;
+            currentFace.Vertex2 := 0;
+            currentFace.Vertex3 := 0;
+            currentFace.Vertex4 := 0;
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Найдена запись грани по флагам', [], LM_Info);
+          end
+          else if (vertexFlags and 64) = 64 then begin
+            // Это вершина PolyFaceMesh
+            isPolyFaceVertex := True;
+            isFaceRecord := False;
+            programlog.LogOutFormatStr('uzeentpolyfacemesh: Найдена вершина PolyFaceMesh по флагам', [], LM_Info);
+          end;
         end
         else if not isFaceRecord then begin
           // Обработка координат для вершин PolyFaceMesh
@@ -314,6 +336,12 @@ begin
     Representation.Clear;
     
     facesDrawn := 0;
+    
+    // Проверка условий для отрисовки граней
+    if (FFaceCount <= 0) then
+      programlog.LogOutFormatStr('uzeentpolyfacemesh: Отрисовка граней пропущена - FFaceCount = %d', [FFaceCount], LM_Info);
+    if (VertexArrayInWCS.Count <= 0) then
+      programlog.LogOutFormatStr('uzeentpolyfacemesh: Отрисовка граней пропущена - VertexArrayInWCS.Count = %d', [VertexArrayInWCS.Count], LM_Info);
     
     // Отрисовка граней полигональной сети
     if (FFaceCount > 0) and (VertexArrayInWCS.Count > 0) then begin
