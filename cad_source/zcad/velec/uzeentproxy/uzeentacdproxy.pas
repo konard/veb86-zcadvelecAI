@@ -706,11 +706,57 @@ begin
     EntExtensions.RunOnAfterEntityFormat(@self, drawing, DC);
 end;
 
-{ Отрисовывает геометрию через Representation (стандартный путь ZCAD) }
+{ Отрисовывает геометрию прокси-объекта.
+  Контуры (полилинии) отрисовываются через Representation.
+  Заполненные контуры (Shell/Polygon с SetFill=1) дополнительно
+  отрисовываются как набор треугольников (triangle fan). }
 procedure GDBObjAcdProxy.DrawGeometry(lw: integer; var DC: TDrawContext;
   const inFrustumState: TInBoundingVolume);
+var
+  I, J, VCount: Integer;
+  Normal: TzePoint3d;
+  ir: itrec;
+  pV: PzePoint3d;
+  FillVerts: array of TzePoint3d;
 begin
   Representation.DrawGeometry(DC, vp.BoundingBox, inFrustumState);
+
+  { Отрисовываем заполненные контуры (SOLID заливка).
+    Используем triangle fan: первая вершина — центр, остальные — по контуру.
+    Работает корректно для выпуклых полигонов (прямоугольники,
+    треугольники стрелок). }
+  for I := 0 to FContourCount - 1 do
+  begin
+    if not FContours[I].Filled then
+      Continue;
+
+    VCount := FContours[I].Vertices.Count;
+    if VCount < 3 then
+      Continue;
+
+    { Собираем вершины контура в локальный массив }
+    SetLength(FillVerts, VCount);
+    J := 0;
+    pV := FContours[I].Vertices.beginiterate(ir);
+    while (pV <> nil) and (J < VCount) do
+    begin
+      FillVerts[J] := pV^;
+      Inc(J);
+      pV := FContours[I].Vertices.iterate(ir);
+    end;
+
+    { Нормаль (0,0,1) для плоских 2D-контуров }
+    Normal.x := 0;
+    Normal.y := 0;
+    Normal.z := 1;
+
+    { Triangle fan: треугольники (v[0], v[j], v[j+1]) }
+    for J := 1 to VCount - 2 do
+      DC.drawer.DrawTriangle3DInModelSpace(
+        Normal, FillVerts[0], FillVerts[J], FillVerts[J + 1],
+        DC.DrawingContext.matrixs);
+  end;
+
   inherited;
 end;
 

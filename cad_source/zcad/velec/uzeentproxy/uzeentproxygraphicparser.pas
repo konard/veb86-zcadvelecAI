@@ -61,6 +61,9 @@ type
     Vertices: GDBPoint3DArray;
     { Флаг: контур замкнут (полигон, круг, эллипс) }
     Closed: Boolean;
+    { Флаг: контур залит (SOLID заливка). Устанавливается когда
+      примитив был создан после команды SetFill(1) }
+    Filled: Boolean;
   end;
 
   { Итоговый результат разбора одного Proxy Graphic блока }
@@ -95,6 +98,11 @@ type
     FMatrixStack: array of TzeTypedMatrix4d;
     FMatrixStackDepth: Integer;
 
+    { Текущий режим заливки.
+      SetFill(1) = заливка включена, SetFill(0 или 2) = выключена.
+      Применяется к замкнутым контурам (Shell, Polygon). }
+    FFillActive: Boolean;
+
     { Разбирает заголовок блока; возвращает количество команд }
     function ParseHeader(out CommandCount: Integer): Boolean;
 
@@ -119,7 +127,7 @@ type
 
     { Добавляет контур (набор вершин одного примитива) в массив контуров }
     procedure AppendContour(var Src: GDBPoint3DArray;
-      const IsClosed: Boolean);
+      const IsClosed: Boolean; const IsFilled: Boolean);
 
     { Расширяет суммарный BBox данными из одного примитива }
     procedure MergeHandlerBBox(const HandlerResult: TProxyHandlerResult);
@@ -179,6 +187,7 @@ begin
   FillChar(FResult, SizeOf(FResult), 0);
   FMatrixStackDepth := 0;
   SetLength(FMatrixStack, 0);
+  FFillActive := False;
 end;
 
 destructor TProxyGraphicParser.Destroy;
@@ -190,7 +199,7 @@ end;
 { Добавляет контур (вершины одного примитива) как отдельный элемент.
   Каждый примитив хранится в своём контуре для раздельной отрисовки. }
 procedure TProxyGraphicParser.AppendContour(var Src: GDBPoint3DArray;
-  const IsClosed: Boolean);
+  const IsClosed: Boolean; const IsFilled: Boolean);
 var
   Idx: Integer;
   ir: itrec;
@@ -200,6 +209,7 @@ begin
   SetLength(FResult.Contours, Idx + 1);
   FResult.Contours[Idx].Vertices.init(Src.Count);
   FResult.Contours[Idx].Closed := IsClosed;
+  FResult.Contours[Idx].Filled := IsFilled;
   pV := Src.beginiterate(ir);
   while pV <> nil do
   begin
@@ -335,6 +345,12 @@ begin
       for Col := 0 to 3 do
         NewMatrix.mtr.v[Row].v[Col] := MatrixData[Col * 4 + Row];
 
+    { Устанавливаем тип матрицы: общая трансформация (не единичная).
+      Без этого поле t может содержать мусор, и если оно окажется
+      равным CMTIdentity = [MTIdentity], функция VectorTransform3D
+      пропустит умножение и вернёт исходный вектор без изменений. }
+    NewMatrix.t := CMTTransform;
+
     { Добавляем матрицу в стек }
     Inc(FMatrixStackDepth);
     if FMatrixStackDepth > Length(FMatrixStack) then
@@ -447,11 +463,19 @@ begin
   end;
 end;
 
-{ Системный обработчик: SetFill — читает флаг заливки }
+{ Системный обработчик: SetFill — читает и сохраняет флаг заливки.
+  Значение 1 (kAcGiFillAlways) включает заливку.
+  Значения 0 и 2 (kAcGiFillNever) выключают заливку. }
 procedure TProxyGraphicParser.HandleSetFill;
+var
+  FillValue: Integer;
 begin
   try
-    FStream.ReadInt32;
+    FillValue := FStream.ReadInt32;
+    FFillActive := (FillValue = 1);
+    programlog.LogOutFormatStr(
+      'uzeentproxygraphicparser: SetFill value=%d active=%s',
+      [FillValue, BoolToStr(FFillActive, True)], LM_Info);
   except
     on E: Exception do
       programlog.LogOutFormatStr(
@@ -596,10 +620,12 @@ begin
         { Обновляем суммарный BBox }
         MergeHandlerBBox(HandlerResult);
 
-        { Сохраняем контур как отдельный элемент для раздельной отрисовки }
+        { Сохраняем контур как отдельный элемент для раздельной отрисовки.
+          Передаём текущее состояние заливки для замкнутых контуров. }
         if HandlerResult.HasVertices and (HandlerResult.Vertices.Count > 0) then
         begin
-          AppendContour(HandlerResult.Vertices, HandlerResult.Closed);
+          AppendContour(HandlerResult.Vertices, HandlerResult.Closed,
+            FFillActive and HandlerResult.Closed);
           Inc(FResult.ContourCount);
           HandlerResult.Vertices.done;
         end;
