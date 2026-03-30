@@ -1,0 +1,158 @@
+=== SPDSSECTION at DXF line 2763, 2712 bytes, 72 commands ===
+  Cmd[  0]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |       1.000000       0.000000       0.000000       0.000000 |
+           |       0.000000       1.000000       0.000000       0.000000 |
+           |       0.000000       0.000000       1.000000       0.000000 |
+           |       0.000000       0.000000       0.000000       1.000000 |
+  Cmd[  1]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[  2]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[  3]: opcode= 9 (Shell           ) size=172
+           vertexCount = 5
+           v[0] = (18086.6950, 24564.8307, 0.0000)
+           v[1] = (18086.6950, 25054.8307, 0.0000)
+           v[2] = (17762.9450, 25054.8307, 0.0000)
+           v[3] = (17762.9450, 24564.8307, 0.0000)
+           v[4] = (18086.6950, 24564.8307, 0.0000)
+           faceEntryCount = 6
+           faces = [5, 0, 1, 2, 3, 4]
+  Cmd[  4]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[  5]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[  6]: opcode= 9 (Shell           ) size=172
+           vertexCount = 5
+           v[0] = (2421.7631, 1496.4398, 0.0000)
+           v[1] = (2421.7631, 1986.4398, 0.0000)
+           v[2] = (2098.0131, 1986.4398, 0.0000)
+           v[3] = (2098.0131, 1496.4398, 0.0000)
+           v[4] = (2421.7631, 1496.4398, 0.0000)
+           faceEntryCount = 6
+           faces = [5, 0, 1, 2, 3, 4]
+  Cmd[  7]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[  8]: opcode=19 (SetMarker       ) size=12
+  Cmd[  9]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 10]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 11]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 12]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 13]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |       1.000000       0.000000       0.000000   17191.646332 |
+           |       0.000000       1.000000      -0.000000   24705.692980 |
+           |      -0.000000       0.000000       1.000000       0.000000 |
+           |       0.000000       0.000000       0.000000       1.000000 |
+  Cmd[ 14]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 15]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[ 16]: opcode= 9 (Shell           ) size=160
+           vertexCount = 4
+           v[0] = (308.7081, 394.8726, 0.0000)
+           v[1] = (250.6849, 434.0301, 0.0000)
+           v[2] = (-308.7081, -394.8726, 0.0000)
+           v[3] = (-250.6849, -434.0301, 0.0000)
+           faceEntryCount = 5
+           faces = [4, 0, 1, 2, 3]
+  Cmd[ 17]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[ 18]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+  Cmd[ 19]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 20]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 21]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 22]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 23]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 24]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |       1.000000       0.000000       0.000000    2148.788699 |
+           |       0.000000       1.000000      -0.000000    2415.343340 |
+           |      -0.000000       0.000000       1.000000       0.000000 |
+           |       0.000000       0.000000       0.000000       1.000000 |
+  Cmd[ 25]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 26]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[ 27]: opcode= 9 (Shell           ) size=160
+           vertexCount = 4
+           v[0] = (-308.7081, -394.8726, 0.0000)
+           v[1] = (-250.6849, -434.0301, 0.0000)
+           v[2] = (308.7081, 394.8726, 0.0000)
+           v[3] = (250.6849, 434.0301, 0.0000)
+           faceEntryCount = 5
+           faces = [4, 0, 1, 2, 3]
+  Cmd[ 28]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[ 29]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+  Cmd[ 30]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 31]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 32]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 33]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 34]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 35]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[ 36]: opcode= 9 (Shell           ) size=132
+           vertexCount = 3
+           v[0] = (17332.5365, 24851.8948, 0.0000)
+           v[1] = (17609.7056, 24725.5007, 0.0000)
+           v[2] = (17553.4552, 24642.1495, 0.0000)
+           faceEntryCount = 4
+           faces = [3, 0, 1, 2]
+  Cmd[ 37]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[ 38]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 39]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 40]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 41]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 42]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 43]: opcode= 6 (Polyline        ) size=60
+           vertexCount = 2
+           v[0] = (17332.5365, 24851.8948, 0.0000)
+           v[1] = (18051.7672, 24366.5150, 0.0000)
+  Cmd[ 44]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 45]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 46]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 47]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 48]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 49]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED)
+  Cmd[ 50]: opcode= 9 (Shell           ) size=132
+           vertexCount = 3
+           v[0] = (2065.9217, 2229.9841, 0.0000)
+           v[1] = (2343.0908, 2103.5900, 0.0000)
+           v[2] = (2286.8404, 2020.2388, 0.0000)
+           faceEntryCount = 4
+           faces = [3, 0, 1, 2]
+  Cmd[ 51]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2))
+  Cmd[ 52]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 53]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 54]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 55]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 56]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 57]: opcode= 6 (Polyline        ) size=60
+           vertexCount = 2
+           v[0] = (2065.9217, 2229.9841, 0.0000)
+           v[1] = (2785.1524, 1744.6043, 0.0000)
+  Cmd[ 58]: opcode=19 (SetMarker       ) size=12
+  Cmd[ 59]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 60]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 61]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 62]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 63]: opcode=38 (UnicodeText2    ) size=200
+  Cmd[ 64]: opcode=22 (SetTrueColor    ) size=12
+  Cmd[ 65]: opcode=23 (SetLineweight   ) size=12
+  Cmd[ 66]: opcode=24 (SetLtScale      ) size=16
+  Cmd[ 67]: opcode=18 (SetLinetype     ) size=12
+  Cmd[ 68]: opcode=38 (UnicodeText2    ) size=200
+  Cmd[ 69]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |       1.000000       0.000000       0.000000       1.000000 |
+           |       0.000000       1.000000       0.000000       0.000000 |
+           |       0.000000       0.000000       1.000000       0.000000 |
+           |       0.000000       0.000000       0.000000       1.000000 |
+  Cmd[ 70]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+  Cmd[ 71]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+

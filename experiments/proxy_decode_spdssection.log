@@ -1,0 +1,172 @@
+================================================================================
+FILE: testarrow.txt
+================================================================================
+
+----------------------------------------------------------------------
+Entity #1: SPDSNOTEPOSITION (DXF line 2451, 1360 bytes)
+----------------------------------------------------------------------
+  ChunkSize    = 1360
+  CommandCount = 41
+  Total bytes  = 1360
+
+  Cmd[  0]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |     1.000000     0.000000     0.000000     0.000000 |
+           |     0.000000     1.000000     0.000000     0.000000 |
+           |     0.000000     0.000000     1.000000     0.000000 |
+           |     0.000000     0.000000     0.000000     1.000000 |
+  Cmd[  1]: opcode=22 (SetTrueColor    ) size=12
+           value = -1023410177 (0xC2FFFFFF)
+  Cmd[  2]: opcode=19 (SetMarker       ) size=12
+           value = 0
+  Cmd[  3]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[  4]: opcode=23 (SetLineweight   ) size=12
+           value = 25
+  Cmd[  5]: opcode=24 (SetLtScale      ) size=16
+           ltScale = 100.000000
+  Cmd[  6]: opcode=18 (SetLinetype     ) size=12
+           value = 32767
+  Cmd[  7]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED) <<< SETFILL >>>
+  Cmd[  8]: opcode=22 (SetTrueColor    ) size=12
+           value = -1023410177 (0xC2FFFFFF)
+  Cmd[  9]: opcode= 9 (Shell           ) size=172
+           vertexCount = 5
+           v[0] = (2278.056843, 1528.048900, 0.000000)
+           v[1] = (5896.806843, 1528.048900, 0.000000)
+           v[2] = (5896.806843, 1878.048900, 0.000000)
+           v[3] = (2278.056843, 1878.048900, 0.000000)
+           v[4] = (2278.056843, 1528.048900, 0.000000)
+           faceEntryCount = 6
+           faces = [5, 0, 1, 2, 3, 4]
+  Cmd[ 10]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[ 11]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2)) <<< SETFILL >>>
+  Cmd[ 12]: opcode=38 (UnicodeText2    ) size=236
+           insert    = (2328.056843, 1578.048900, 0.000000)
+           normal    = (0.000000, 0.000000, 1.000000)
+           direction = (1.000000, 0.000000, 0.000000)
+           height      = 0.000000
+           widthFactor = 0.000000
+           oblique     = 0.000000
+           text = 'е щиты\x00\x00\uffff\uffff\x00\x00\x00\x00䀀䁯\x00\x00\x00㿰\x00\x00\x00\x00\x00\x00\x00㿰\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00CS_Gost2304.shx\x00\x00\x00'
+  Cmd[ 13]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[ 14]: opcode=23 (SetLineweight   ) size=12
+           value = 25
+  Cmd[ 15]: opcode=24 (SetLtScale      ) size=16
+           ltScale = 100.000000
+  Cmd[ 16]: opcode=18 (SetLinetype     ) size=12
+           value = 32767
+  Cmd[ 17]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[ 18]: opcode=23 (SetLineweight   ) size=12
+           value = 25
+  Cmd[ 19]: opcode=24 (SetLtScale      ) size=16
+           ltScale = 100.000000
+  Cmd[ 20]: opcode=18 (SetLinetype     ) size=12
+           value = 32767
+  Cmd[ 21]: opcode=20 (SetFill         ) size=12
+           fill = 1 (FILLED) <<< SETFILL >>>
+  Cmd[ 22]: opcode= 9 (Shell           ) size=132
+           vertexCount = 3
+           v[0] = (1495.893653, 1056.531977, 0.000000)
+           v[1] = (1725.056777, 1257.236796, 0.000000)
+           v[2] = (1777.914677, 1171.694053, 0.000000)
+           faceEntryCount = 4
+           faces = [3, 0, 1, 2]
+  Cmd[ 23]: opcode=20 (SetFill         ) size=12
+           fill = 2 (unknown(2)) <<< SETFILL >>>
+  Cmd[ 24]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[ 25]: opcode=23 (SetLineweight   ) size=12
+           value = 25
+  Cmd[ 26]: opcode=24 (SetLtScale      ) size=16
+           ltScale = 100.000000
+  Cmd[ 27]: opcode=18 (SetLinetype     ) size=12
+           value = 32767
+  Cmd[ 28]: opcode=19 (SetMarker       ) size=12
+           value = 2139062144
+  Cmd[ 29]: opcode= 6 (Polyline        ) size=60
+           vertexCount = 2
+           v[0] = (1495.893653, 1056.531977, 0.000000)
+           v[1] = (2178.056843, 1478.048900, 0.000000)
+  Cmd[ 30]: opcode=19 (SetMarker       ) size=12
+           value = 0
+  Cmd[ 31]: opcode=22 (SetTrueColor    ) size=12
+           value = -1073741824 (0xC0000000)
+  Cmd[ 32]: opcode=23 (SetLineweight   ) size=12
+           value = 25
+  Cmd[ 33]: opcode=24 (SetLtScale      ) size=16
+           ltScale = 100.000000
+  Cmd[ 34]: opcode=18 (SetLinetype     ) size=12
+           value = 32767
+  Cmd[ 35]: opcode=19 (SetMarker       ) size=12
+           value = 2139062145
+  Cmd[ 36]: opcode= 6 (Polyline        ) size=60
+           vertexCount = 2
+           v[0] = (2178.056843, 1478.048900, 0.000000)
+           v[1] = (5996.806843, 1478.048900, 0.000000)
+  Cmd[ 37]: opcode=19 (SetMarker       ) size=12
+           value = 0
+  Cmd[ 38]: opcode=29 (PushMatrix      ) size=136
+           <<< PUSH MATRIX >>>
+           |     1.000000     0.000000     0.000000     1.000000 |
+           |     0.000000     1.000000     0.000000     0.000000 |
+           |     0.000000     0.000000     1.000000     0.000000 |
+           |     0.000000     0.000000     0.000000     1.000000 |
+  Cmd[ 39]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+  Cmd[ 40]: opcode=31 (PopMatrix       ) size=8
+           <<< POP MATRIX >>>
+
+----------------------------------------------------------------------
+Entity #2: XRECORD (DXF line 7925, 104 bytes)
+----------------------------------------------------------------------
+  ChunkSize    = 6
+  CommandCount = 2
+  Total bytes  = 104
+
+  Cmd[  0]: opcode=28 (Unknown(28)     ) size=129
+  [!] Достигнут конец данных на команде 1
+
+----------------------------------------------------------------------
+Entity #3: XRECORD (DXF line 7947, 60 bytes)
+----------------------------------------------------------------------
+  [Пропуск] Не proxy-графика (chunk=6, cmds=65538)
+
+----------------------------------------------------------------------
+Entity #4: XRECORD (DXF line 7969, 11877 bytes)
+----------------------------------------------------------------------
+  ChunkSize    = 6
+  CommandCount = 2
+  Total bytes  = 11877
+
+  Cmd[  0]: opcode=28 (Unknown(28)     ) size=171334
+  [!] Достигнут конец данных на команде 1
+
+----------------------------------------------------------------------
+Entity #5: XRECORD (DXF line 8885, 5626 bytes)
+----------------------------------------------------------------------
+  [Пропуск] Не proxy-графика (chunk=67324752, cmds=134217738)
+
+----------------------------------------------------------------------
+Entity #6: XRECORD (DXF line 8997, 5626 bytes)
+----------------------------------------------------------------------
+  [Пропуск] Не proxy-графика (chunk=67324752, cmds=134217738)
+
+----------------------------------------------------------------------
+Entity #7: XRECORD (DXF line 9149, 5624 bytes)
+----------------------------------------------------------------------
+  [Пропуск] Не proxy-графика (chunk=67324752, cmds=134217738)
+
+================================================================================
+FILE: testSPDSSECTION.txt
+================================================================================
+
+  [!] Файл не найден: /tmp/gh-issue-solver-1774855379383/testSPDSSECTION.txt
+
+
+Output saved to /tmp/gh-issue-solver-1774855379383/experiments/proxy_decode_output.log
